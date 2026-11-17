@@ -1,0 +1,13 @@
+const router = require('express').Router();
+const { requireAuth } = require('../middleware/auth');
+const { upsertMe } = require('../controllers/userController');
+const submissions = require('../controllers/submissionController');
+const payments = require('../controllers/paymentController');
+const contact = require('../controllers/contactController');
+router.post('/users/me', requireAuth, upsertMe);
+router.post('/payments/create-order', requireAuth, payments.createOrder);
+router.post('/submissions', requireAuth, submissions.create);
+router.get('/submissions', requireAuth, submissions.listMine);
+router.get('/submissions/:id', requireAuth, submissions.getMine);
+router.post('/contact', contact.createContact);
+module.exports = router;
