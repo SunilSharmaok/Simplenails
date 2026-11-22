@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleNails Studio — Photo, PDF & Creative Editing</title>
+    <meta name="description" content="SimpleNails Studio makes photo, PDF and creative editing simple. Upload your project, choose a clear package and track its progress online.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta name="theme-color" content="#0a1025">
+
+    <!-- FIREBASE SDKs - MUST BE BEFORE OTHER SCRIPTS -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <!-- Other scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js" aria-hidden="true"></div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-cut logo-icon"></i>
+            <span>SimpleNails</span>
+        </a>
+
+        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#homesec">Home</a></li>
+                <li><a href="project.html">Start Project</a></li>
+                <li><a href="submissions.html">My Submissions</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+
+            <!-- Mobile login container -->
+            <div id="mobile-login-container" class="google-login-container mobile-login"></div>
+        </nav>
+
+        <!-- Desktop login container -->
+        <div id="desktop-login-container" class="google-login-container desktop-login"></div>
+
+        <div class="header-actions"><button class="theme-switch" type="button" aria-label="Switch color theme" title="Switch theme"><i class="fas fa-sun"></i></button><a href="project.html" class="cta-button">Start a project <i class="fas fa-arrow-right"></i></a></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="homesec">
+        <span id="main-content" class="anchor-target"></span>
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">
+                    <i class="fas fa-rocket"></i> YOUR CREATIVE STUDIO • FROM ₹1 PER PROJECT
+                </span>
+
+                <h1>Your vision, <span class="gradient-text">beautifully edited.</span></h1>
+
+                <p class="hero-subtitle">Photo retouching, clean backgrounds, polished PDFs and scroll-stopping graphics. One easy place to create, upload and keep track of every project.</p>
+                <div class="hero-cta">
+                    <a href="project.html" class="primary-btn">
+                        <i class="fas fa-file-upload"></i> Start Your Project
+                    </a>
+                    <a href="#how-it-works" class="secondary-btn">
+                        <i class="fas fa-play-circle"></i> See how it works
+                    </a>
+                </div>
+
+                <div class="hero-proof"><span><i class="fas fa-check-circle"></i> Clear pricing</span><span><i class="fas fa-check-circle"></i> Online project tracking</span><span><i class="fas fa-check-circle"></i> Secure checkout</span></div>
+            </div>
+
+<div class="hero-image">
+                <div class="editor-shell" aria-label="Interactive image comparison demo">
+                    <div class="editor-topbar">
+                        <span class="editor-dots"><i></i><i></i><i></i></span>
+                        <span><i class="fas fa-wand-magic-sparkles"></i> Studio preview</span>
+                        <span class="live-tag">INTERACTIVE DEMO</span>
+                    </div>
+                    <div class="compare-stage" id="compare-stage">
+                        <img class="compare-base" src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=85" alt="Creative desk photograph before a sample color adjustment">
+                        <div class="compare-after" id="compare-after">
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=85" alt="Same creative desk photograph after a sample color adjustment">
+                        </div>
+                        <span class="compare-label left">Original</span><span class="compare-label right">Enhanced</span>
+                        <div class="compare-line" id="compare-line"><span><i class="fas fa-arrows-left-right"></i></span></div>
+                        <input type="range" id="compare-range" min="0" max="100" value="56" aria-label="Move slider to compare the original and enhanced image">
+                    </div>
+                    <div class="editor-bottombar"><span><i class="fas fa-layer-group"></i> Color & detail adjustment</span><span><i class="fas fa-sliders"></i> Slide to compare</span></div>
+                </div>
+                <div class="hero-floating-note"><span class="note-icon"><i class="fas fa-sparkles"></i></span><div><strong>Make every detail count</strong><small>Editing for photos, PDFs & creative work</small></div></div>
+            </div>
+        </div>
+
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+            <span>Explore More</span>
+        </div>
+    </section>
+
+    <div class="capabilities-strip" aria-label="Available editing services"><span>MADE FOR YOUR CREATIVE WORK</span><div><b>PHOTO RETOUCHING</b><b>PDF EDITING</b><b>BACKGROUND REMOVAL</b><b>SOCIAL DESIGN</b><b>COLOR GRADING</b></div></div>
+
+    <section class="services-showcase" id="services">
+        <div class="section-heading-modern"><span class="eyebrow">WHAT WE CREATE</span><h2>All your creative edits.<br><span>One simple studio.</span></h2><p>Choose a service, tell us what you need, and upload your files in a few easy steps.</p></div>
+        <div class="service-bento">
+            <a class="service-tile service-tile-featured" href="project.html?service=Photo%20Editing"><div class="tile-visual tile-photo"><i class="fas fa-image"></i><span>EDIT / RETOUCH / ENHANCE</span></div><div class="tile-copy"><div><span class="tile-index">01 / PHOTO</span><h3>Photo editing</h3><p>Retouching, color corrections, portraits and more.</p></div><i class="fas fa-arrow-up-right"></i></div></a>
+            <a class="service-tile" href="project.html?service=Background%20Removal"><div class="tile-visual tile-cutout"><i class="fas fa-object-ungroup"></i></div><div class="tile-copy"><div><span class="tile-index">02 / CLEANUP</span><h3>Background removal</h3><p>Clean cutouts for products and profiles.</p></div><i class="fas fa-arrow-up-right"></i></div></a>
+            <a class="service-tile" href="project.html?service=PDF%20Editing"><div class="tile-visual tile-pdf"><i class="fas fa-file-pdf"></i></div><div class="tile-copy"><div><span class="tile-index">03 / DOCUMENTS</span><h3>PDF & document edits</h3><p>Formatting, edits and polished layouts.</p></div><i class="fas fa-arrow-up-right"></i></div></a>
+            <a class="service-tile service-tile-wide" href="project.html?service=Youtube%20Thumbnail"><div class="tile-visual tile-design"><i class="fas fa-pen-nib"></i><div class="mini-chip">CREATIVE STUDIO</div></div><div class="tile-copy"><div><span class="tile-index">04 / DESIGN</span><h3>Social & creative design</h3><p>Thumbnails, posters, banners, logos and digital content.</p></div><i class="fas fa-arrow-up-right"></i></div></a>
+        </div>
+    </section>
+    <section class="workflow-modern" id="how-it-works"><div class="section-heading-modern"><span class="eyebrow">YOUR WORKFLOW, SIMPLIFIED</span><h2>From idea to finished<br><span>in three simple steps.</span></h2></div><div class="workflow-grid">
+        <div class="workflow-step"><span>01</span><div class="workflow-icon"><i class="fas fa-list-check"></i></div><h3>Tell us your vision</h3><p>Choose a service and explain the changes you want.</p></div>
+        <div class="workflow-step"><span>02</span><div class="workflow-icon"><i class="fas fa-cloud-arrow-up"></i></div><h3>Upload & pay</h3><p>Attach your files, review the total and check out securely.</p></div>
+        <div class="workflow-step"><span>03</span><div class="workflow-icon"><i class="fas fa-circle-check"></i></div><h3>Track your project</h3><p>Check progress and access finished files from your dashboard when available.</p></div>
+    </div><a class="workflow-link" href="project.html">Create your project <i class="fas fa-arrow-right"></i></a></section>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Premium Photo Editing Features</h2>
+            <p>Everything you need to take a creative project from idea to delivery</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card animated fadeInUp">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast Processing</h3>
+                <p>24-hour average turnaround time with our optimized workflow and expert photo editors.</p>
+            </div>
+
+            <div class="feature-card animated fadeInUp delay-1">
+                <i class="fas fa-lock"></i>
+                <h3>Secure File Handling</h3>
+                <p>Your photos are processed securely with 100% confidentiality & encrypted uploads guaranteed.</p>
+            </div>
+
+            <div class="feature-card animated fadeInUp delay-2">
+                <i class="fas fa-sliders-h"></i>
+                <h3>Advanced Photo Editing</h3>
+                <p>Full control over editing preferences, color correction, retouching, and enhancement options.</p>
+            </div>
+
+            <div class="feature-card animated fadeInUp">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Multi-Format Support</h3>
+                <p>Works with all popular image formats including JPG, PNG, RAW files, and more.</p>
+            </div>
+
+            <div class="feature-card animated fadeInUp delay-1">
+                <i class="fas fa-infinity"></i>
+                <h3>Bulk Processing</h3>
+                <p>Upload and process multiple photos at once with consistent editing across all images.</p>
+            </div>
+
+            <div class="feature-card animated fadeInUp delay-2">
+                <i class="fas fa-adjust"></i>
+                <h3>Quality Preservation</h3>
+                <p>Advanced algorithms ensure your photos look perfect with no quality loss during editing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-title">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Choose the editing plan that fits your needs</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card animated fadeInUp">
+                <h3>Basic Editing</h3>
+                <div class="price">₹1<span>/project</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Basic color correction</li>
+                    <li><i class="fas fa-check"></i> Simple cropping & resizing</li>
+                    <li><i class="fas fa-check"></i> Minor blemish removal</li>
+                    <li><i class="fas fa-check"></i> Delivery time confirmed after review</li>
+                    <li><i class="fas fa-check"></i> Email support</li>
+                </ul>
+                <a href="project.html?plan=basic" class="primaryo-btn">Choose Basic <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="pricing-card popular animated fadeInUp delay-1">
+                <h3>Pro Editing</h3>
+                <div class="price">₹10<span>/project</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Advanced color grading</li>
+                    <li><i class="fas fa-check"></i> Background removal/replacement</li>
+                    <li><i class="fas fa-check"></i> Professional retouching</li>
+                    <li><i class="fas fa-check"></i> More detailed editing requests</li>
+                    <li><i class="fas fa-check"></i> WhatsApp contact option</li>
+                </ul>
+                <a href="project.html?plan=full" class="primaryo-btn">Choose Pro <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="pricing-card animated fadeInUp delay-2">
+                <h3>Custom Projects</h3>
+                <div class="price">₹20<span>/project</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Discuss larger or unique projects</li>
+                    <li><i class="fas fa-check"></i> Custom creative requests</li>
+                    <li><i class="fas fa-check"></i> Detailed project instructions</li>
+                    <li><i class="fas fa-check"></i> Discuss delivery before ordering</li>
+                    <li><i class="fas fa-check"></i> Project status tracking</li>
+                </ul>
+                <a href="project.html?plan=custom" class="primaryo-btn">Choose Custom <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="pricing-estimator"><div><span class="eyebrow">QUICK PRICE CHECK</span><h3>Know your total before you begin.</h3><p>Checkout prices are per project. For larger or unusual requests, contact us before paying.</p></div><div class="estimate-actions"><label for="estimate-plan">Choose an editing package</label><select id="estimate-plan"><option value="basic">Basic editing</option><option value="full">Pro editing</option><option value="custom">Custom editing</option></select><div class="estimate-total"><span>Estimated checkout total</span><strong id="estimate-total">₹1</strong></div><a id="estimate-link" href="project.html?plan=basic" class="primary-btn">Continue <i class="fas fa-arrow-right"></i></a></div></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions about our photo editing service</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item animated fadeInUp">
+                <div class="faq-question">
+                    <span>What photo formats do you support?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We support all major image formats including JPG, PNG, RAW files (from most cameras), and more.
+                        If you have a specific format, please contact us before submitting.</p>
+                </div>
+            </div>
+
+            <div class="faq-item animated fadeInUp delay-1">
+                <div class="faq-question">
+                    <span>How secure is my photo data?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>All uploads are encrypted and stored securely. We sign NDAs on request and delete all files after
+                        project completion to ensure your privacy.</p>
+                </div>
+            </div>
+
+            <div class="faq-item animated fadeInUp delay-2">
+                <div class="faq-question">
+                    <span>What is your revision policy?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We offer up to two free revisions per project to ensure you're completely satisfied. Additional
+                        revisions may incur a small fee depending on the complexity.</p>
+                </div>
+            </div>
+
+            <div class="faq-item animated fadeInUp">
+                <div class="faq-question">
+                    <span>Will my photos lose quality during editing?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No, we use professional editing software and techniques that preserve your image quality. For
+                        certain edits, we may even be able to enhance the overall quality.</p>
+                </div>
+            </div>
+
+            <div class="faq-item animated fadeInUp delay-1">
+                <div class="faq-question">
+                    <span>Can I request specific editing styles?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! You can provide reference images, detailed instructions, or even sample edits to help
+                        our editors understand exactly what you're looking for.</p>
+                </div>
+            </div>
+
+            <div class="faq-item animated fadeInUp delay-2">
+                <div class="faq-question">
+                    <span>Do you offer bulk discounts?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we offer significant discounts for bulk orders. Contact us with your project details, and
+                        we'll provide a custom quote with bulk pricing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policies Section -->
+    <section class="policies-section" id="policies">
+        <div class="policies-container">
+            <h2><i class="fas fa-file-contract"></i> Our Policies</h2>
+            <div class="policies-grid">
+                <div class="policy-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Privacy Policy</h3>
+                    <p>Learn how we protect and handle your personal data and information.</p>
+                    <button class="policy-btn" onclick="showPolicy('privacy')">Read Policy</button>
+                </div>
+
+                <div class="policy-card">
+                    <i class="fas fa-gavel"></i>
+                    <h3>Terms & Conditions</h3>
+                    <p>Understand the terms of service for using our photo editing platform.</p>
+                    <button class="policy-btn" onclick="showPolicy('terms')">Read Policy</button>
+                </div>
+
+                <div class="policy-card">
+                    <i class="fas fa-undo-alt"></i>
+                    <h3>Cancellation</h3>
+                    <p>Our policies regarding order cancellations and refund procedures.</p>
+                    <button class="policy-btn" onclick="showPolicy('cancellation')">Read Policy</button>
+                </div>
+
+                <div class="policy-card">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Shipping & Delivery</h3>
+                    <p>Information about our delivery timelines and our shipping policies.</p>
+                    <button class="policy-btn" onclick="showPolicy('shipping')">Read Policy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="closing-cta"><div><span class="eyebrow">READY WHEN YOU ARE</span><h2>Let's make something<br><em>worth sharing.</em></h2><p>Give your next project the attention it deserves.</p></div><a href="project.html" class="primary-btn">Let's get started <i class="fas fa-arrow-right"></i></a></section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <a href="#" class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>SimpleNails</span>
+                </a>
+                <div class="footer-about">
+                    <p>Professional photo editing services with quick turnaround and premium quality. Transform your
+                        images with our expert editing team.</p>
+                </div>
+                <div class="footer-social">
+                    <a class="soc" href="https://x.com/SunilSh08928239" target="_blank" rel="noopener noreferrer" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="soc" href="https://www.instagram.com/_.sunil._sharma/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="soc" href="mailto:sunilsharmame30@gmail.com" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a class="soc" href="https://sunilsharmaportfolio.netlify.app/" target="_blank" rel="noopener noreferrer" title="Portfolio">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a class="soc"
+                        href="https://wa.me/918899452167?text=Hi%20I%20want%20to%20get%20photo%20editing%20services"
+                        target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#homesec"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Start Project</a></li>
+                    <li><a href="submissions.html"><i class="fas fa-chevron-right"></i> My Submissions</a></li>
+                    <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                    <li><a href="#pricing"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Photo Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#project"><i class="fas fa-chevron-right"></i> Photo Editing</a></li>
+                    <li><a href="#project"><i class="fas fa-chevron-right"></i> Background Removal</a></li>
+                    <li><a href="#project"><i class="fas fa-chevron-right"></i> Color Correction</a></li>
+                    <li><a href="#project"><i class="fas fa-chevron-right"></i> Photo Restoration</a></li>
+                    <li><a href="#project"><i class="fas fa-chevron-right"></i> Product Photo Editing</a></li>
+                    <li><a href="#project"><i class="fas fa-chevron-right"></i> Creative Design</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-envelope"></i> sunilsharmame30@gmail.com</p>
+                    <p><i class="fas fa-globe"></i> sunilsharmaportfolio.netlify.app</p>
+                    <p><i class="fab fa-whatsapp"></i> +91 9999999999</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Chandigarh University, India</p>
+                </div>
+                <div class="footer-policies">
+                    <h4>Our Policies</h4>
+                    <div class="policy-links">
+                        <a href="javascript:void(0)" onclick="showPolicy('privacy')">Privacy Policy</a>
+                        <a href="javascript:void(0)" onclick="showPolicy('terms')">Terms & Conditions</a>
+                        <a href="javascript:void(0)" onclick="showPolicy('cancellation')">Cancellation & Refund</a>
+                        <a href="javascript:void(0)" onclick="showPolicy('shipping')">Shipping & Delivery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="powered-container"><div class="powered-content"><span class="powered-title">Built for simple, secure creative projects</span><div class="footer-tech-tags"><span><i class="fas fa-lock"></i> Secure checkout</span><span><i class="fas fa-cloud-arrow-up"></i> File uploads</span><span><i class="fas fa-folder-open"></i> Project tracking</span></div></div></div>
+
+        <div class="footer-bottom">
+            <p class="copyright">© 2026 SimpleNails. All rights reserved. | Made with ❤️ by Sunil Sharma</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/api-client.js"></script>
+    <script src="script.js"></script>
+    <script src="js/modern.js"></script>
+<a class="floating-support" href="https://wa.me/918899452167?text=Hi%20SimpleNails%2C%20I%20need%20help%20with%20an%20editing%20project" target="_blank" rel="noopener noreferrer" aria-label="Contact SimpleNails on WhatsApp"><i class="fab fa-whatsapp"></i><span>Need help?</span></a>
+</body>
+
+</html>
