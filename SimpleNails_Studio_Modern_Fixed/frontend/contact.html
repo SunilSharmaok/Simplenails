@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SimpleNails</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta name="theme-color" content="#0a1025">
+
+    <!-- FIREBASE SDKs - MUST BE BEFORE OTHER SCRIPTS -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <!-- Other scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js" aria-hidden="true"></div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-cut logo-icon"></i>
+            <span>SimpleNails</span>
+        </a>
+
+        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="project.html">Start Project</a></li>
+                <li><a href="submissions.html">My Submissions</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+            </ul>
+
+            <!-- Mobile login container -->
+            <div id="mobile-login-container" class="google-login-container mobile-login"></div>
+        </nav>
+
+        <!-- Desktop login container -->
+        <div id="desktop-login-container" class="google-login-container desktop-login"></div>
+
+        <div class="header-actions"><button class="theme-switch" type="button" aria-label="Switch color theme" title="Switch theme"><i class="fas fa-sun"></i></button><a href="project.html" class="cta-button">Start a project <i class="fas fa-arrow-right"></i></a></div>
+    </header>
+
+    <!-- Contact Us Section -->
+    <section class="contact-section" id="contact">
+        <span id="main-content" class="anchor-target"></span>
+        <div class="contact-container">
+            <div class="contact-header">
+                <span class="eyebrow">LET'S TALK</span><h2>We'd love to hear from you.</h2>
+                <p>Questions about edits, pricing or an order? We are here to help.</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Us</h3>
+                            <p>sunilsharmame30@gmail.com</p>
+                            <a href="mailto:sunilsharmame30@gmail.com" class="contact-link">
+                                <i class="fas fa-paper-plane"></i> Send Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Connect on Website</h3>
+                            <p>Visit our portfolio</p>
+                            <a href="https://sunilsharmaportfolio.netlify.app/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Website
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>WhatsApp Chat</h3>
+                            <p>Quick response via WhatsApp</p>
+                            <a href="https://wa.me/918899452167?text=Hi%20I%20want%20to%20get%20photo%20editing%20services"
+                                target="_blank" rel="noopener noreferrer" class="contact-link whatsapp-link">
+                                <i class="fab fa-whatsapp"></i> Start Chat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" autocomplete="name" maxlength="120" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" autocomplete="email" maxlength="254" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Subject" maxlength="200" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" rows="5" maxlength="5000" required></textarea>
+                        </div>
+                        <p id="contact-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <a href="index.html" class="footer-logo">
+                    <i class="fas fa-tools"></i>
+                    <span>SimpleNails</span>
+                </a>
+                <div class="footer-about">
+                    <p>Professional photo editing services with quick turnaround and premium quality. Transform your
+                        images with our expert editing team.</p>
+                </div>
+                <div class="footer-social">
+                    <a class="soc" href="https://x.com/SunilSh08928239" target="_blank" rel="noopener noreferrer" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="soc" href="https://www.instagram.com/_.sunil._sharma/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="soc" href="mailto:sunilsharmame30@gmail.com" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a class="soc" href="https://sunilsharmaportfolio.netlify.app/" target="_blank" rel="noopener noreferrer" title="Portfolio">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a class="soc"
+                        href="https://wa.me/918899452167?text=Hi%20I%20want%20to%20get%20photo%20editing%20services"
+                        target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Start Project</a></li>
+                    <li><a href="submissions.html"><i class="fas fa-chevron-right"></i> My Submissions</a></li>
+                    <li><a href="index.html#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                    <li><a href="index.html#pricing"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Photo Services</h3>
+                <ul class="footer-links">
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Photo Editing</a></li>
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Background Removal</a></li>
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Color Correction</a></li>
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Photo Restoration</a></li>
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Product Photo Editing</a></li>
+                    <li><a href="project.html"><i class="fas fa-chevron-right"></i> Creative Design</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-envelope"></i> sunilsharmame30@gmail.com</p>
+                    <p><i class="fas fa-globe"></i> sunilsharmaportfolio.netlify.app</p>
+                    <p><i class="fab fa-whatsapp"></i> +91 8899452167</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Chandigarh University, India</p>
+                </div>
+                <div class="footer-policies">
+                    <h4>Our Policies</h4>
+                    <div class="policy-links">
+                        <a href="javascript:void(0)" onclick="showPolicy('privacy')">Privacy Policy</a>
+                        <a href="javascript:void(0)" onclick="showPolicy('terms')">Terms & Conditions</a>
+                        <a href="javascript:void(0)" onclick="showPolicy('cancellation')">Cancellation & Refund</a>
+                        <a href="javascript:void(0)" onclick="showPolicy('shipping')">Shipping & Delivery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="powered-container"><div class="powered-content"><span class="powered-title">Built for simple, secure creative projects</span><div class="footer-tech-tags"><span><i class="fas fa-lock"></i> Secure checkout</span><span><i class="fas fa-cloud-arrow-up"></i> File uploads</span><span><i class="fas fa-folder-open"></i> Project tracking</span></div></div></div>
+
+        <div class="footer-bottom">
+            <p class="copyright">© 2026 SimpleNails. All rights reserved. | Made with ❤️ by Sunil Sharma</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/api-client.js"></script>
+    <script src="script.js"></script>
+    <script src="js/modern.js"></script>
+<a class="floating-support" href="https://wa.me/918899452167?text=Hi%20SimpleNails%2C%20I%20need%20help%20with%20an%20editing%20project" target="_blank" rel="noopener noreferrer" aria-label="Contact SimpleNails on WhatsApp"><i class="fab fa-whatsapp"></i><span>Need help?</span></a>
+</body>
+
+</html>
