@@ -1,0 +1,11 @@
+SimpleNails Google Login Fix - configuration status
+
+Frontend and backend source code updated.
+Private credentials are NOT included in this ZIP.
+Copy backend/.env from your original local SimpleNails folder into this fix's backend folder.
+Run: cd backend && npm install && npm run dev
+Open: http://localhost:5000
+
+Local HTTP checks passed: /api/health and /contact.html both returned 200; response Content Security Policy allows www.gstatic.com and popup policy is same-origin-allow-popups.
+Firebase Console sign-in provider, domain authorization, and end-to-end Google login need to be verified in your Firebase account and browser.
+Never share backend/.env or a Firebase Admin service-account private key.
