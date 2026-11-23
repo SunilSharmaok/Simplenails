@@ -1,0 +1,17 @@
+const router = require('express').Router();
+const rateLimit = require('express-rate-limit');
+const { requireAuth } = require('../middleware/auth');
+const { upsertMe } = require('../controllers/userController');
+const submissions = require('../controllers/submissionController');
+const payments = require('../controllers/paymentController');
+const contact = require('../controllers/contactController');
+const paymentLimit = rateLimit({ windowMs: 15 * 60 * 1000, limit: 20, standardHeaders: 'draft-7', legacyHeaders: false });
+const contactLimit = rateLimit({ windowMs: 60 * 60 * 1000, limit: 8, standardHeaders: 'draft-7', legacyHeaders: false });
+router.post('/users/me', requireAuth, upsertMe);
+router.post('/payments/create-order', requireAuth, paymentLimit, payments.createOrder);
+router.post('/payments/recover', requireAuth, paymentLimit, submissions.recover);
+router.post('/submissions', requireAuth, paymentLimit, submissions.create);
+router.get('/submissions', requireAuth, submissions.listMine);
+router.get('/submissions/:id', requireAuth, submissions.getMine);
+router.post('/contact', contactLimit, contact.createContact);
+module.exports = router;
